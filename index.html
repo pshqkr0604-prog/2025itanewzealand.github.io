@@ -6,20 +6,25 @@
   <style>
     body { font-family: sans-serif; text-align: center; margin-top: 50px; }
     input, textarea, button { padding: 10px; margin: 10px; width: 300px; }
-    #formSection { display: none; }
+    #mainMenu { display: none; }
   </style>
 </head>
 <body>
   <h1>2025 ITA 뉴질랜드 여행 포털</h1>
-  <p>사번을 입력하세요:</p>
-  <input type="text" id="employeeId" placeholder="예: 1612156">
-  <button onclick="checkId()">확인</button>
 
-  <div id="formSection">
-    <p><strong id="employeeName"></strong> 님, 요청사항을 입력해주세요:</p>
-    <textarea id="request" rows="5" placeholder="요청사항을 입력하세요..."></textarea><br>
-    <button onclick="submitForm()">제출</button>
-    <p id="submitMessage" style="color: green;"></p>
+  <!-- 로그인 섹션 -->
+  <div id="loginSection">
+    <p>사번을 입력하세요:</p>
+    <input type="text" id="employeeId" placeholder="예: 1612156">
+    <button onclick="login()">로그인</button>
+    <p id="loginError" style="color:red;"></p>
+  </div>
+
+  <!-- 로그인 후 메인 화면 -->
+  <div id="mainMenu">
+    <p><strong id="employeeName"></strong> 님, 환영합니다!</p>
+    <p>이제 여행 관련 메뉴를 사용할 수 있습니다.</p>
+    <!-- 다음 기능들: 일정, 요청사항, 여권 업로드 등 추가 예정 -->
   </div>
 
   <script>
@@ -28,37 +33,21 @@
       "1612157": "박성현"
     };
 
-    function checkId() {
+    function login() {
       const inputId = document.getElementById("employeeId").value.trim();
       const name = employeeMap[inputId];
 
       if (name) {
+        // 로그인 성공
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("mainMenu").style.display = "block";
         document.getElementById("employeeName").textContent = name;
-        document.getElementById("formSection").style.display = "block";
-        document.getElementById("submitMessage").textContent = "";
+        document.getElementById("loginError").textContent = "";
       } else {
-        alert("등록되지 않은 사번입니다.");
-        document.getElementById("formSection").style.display = "none";
+        // 로그인 실패
+        document.getElementById("loginError").textContent = "등록되지 않은 사번입니다.";
+        document.getElementById("mainMenu").style.display = "none";
       }
-    }
-
-    function submitForm() {
-      const request = document.getElementById("request").value.trim();
-      const id = document.getElementById("employeeId").value.trim();
-      const name = employeeMap[id];
-
-      if (request === "") {
-        alert("요청사항을 입력해주세요.");
-        return;
-      }
-
-      // 실제론 여기에 Google Sheets 연동이 들어갑니다 (다음 단계)
-      console.log("사번:", id);
-      console.log("이름:", name);
-      console.log("요청사항:", request);
-
-      document.getElementById("submitMessage").textContent = "요청사항이 제출되었습니다. 감사합니다!";
-      document.getElementById("request").value = "";
     }
   </script>
 </body>
