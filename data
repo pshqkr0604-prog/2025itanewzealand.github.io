@@ -1,1 +1,137 @@
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>2025 ITA 뉴질랜드 여행</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    input, textarea, button { padding: 10px; margin: 10px; width: 300px; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 5px 0; }
+    .section { display: none; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>2025 ITA 뉴질랜드 여행 포털</h1>
+
+  <!-- 로그인 화면 -->
+  <div id="loginSection">
+    <p>사번을 입력하세요:</p>
+    <input type="text" id="employeeId" placeholder="예: 1612156">
+    <button onclick="login()">로그인</button>
+    <p id="loginError" style="color:red;"></p>
+  </div>
+
+  <!-- 로그인 후 메인 메뉴 -->
+  <div id="mainMenu" style="display:none;">
+    <p><strong id="employeeName"></strong> 님, 환영합니다!</p>
+    <h3>📂 카테고리를 선택하세요:</h3>
+    <ul>
+      <li><button onclick="showSection('travelSchedule')">🗓 여행 일정 안내</button></li>
+      <li><button onclick="showSection('flightInfo')">✈️ 개인 항공편 정보</button></li>
+      <li><button onclick="showSection('eventSchedule')">🎉 행사 일정</button></li>
+      <li><button onclick="showSection('nzInfo')">🇳🇿 뉴질랜드 소개</button></li>
+      <li><button onclick="showSection('roomDrop')">🎁 룸드랍 물품 설명</button></li>
+      <li><button onclick="showSection('request')">✏️ 요청 사항</button></li>
+      <li><button onclick="showSection('emergency')">📞 긴급 연락망</button></li>
+    </ul>
+
+    <!-- 카테고리 영역들 -->
+    <div id="travelSchedule" class="section">
+      <h4>🗓 여행 일정 안내</h4>
+      <p>1일차: 오클랜드 도착 / 환영식<br>2일차: 밀포드 사운드 투어<br>3일차: 자유 시간 / 선택 관광</p>
+    </div>
+
+    <div id="flightInfo" class="section">
+      <h4>✈️ 개인 항공편 정보</h4>
+      <p>로그인한 사번에 따라 항공편 정보가 여기에 표시될 예정입니다.</p>
+    </div>
+
+    <div id="eventSchedule" class="section">
+      <h4>🎉 행사 일정</h4>
+      <p>2일차 저녁: 환영 만찬<br>3일차 밤: 갈라 디너</p>
+    </div>
+
+    <div id="nzInfo" class="section">
+      <h4>🇳🇿 뉴질랜드 소개</h4>
+      <p>국가명: 뉴질랜드<br>환율: 1 NZD ≈ 800 KRW<br>GDP: 약 2,100억 USD</p>
+    </div>
+
+    <div id="roomDrop" class="section">
+      <h4>🎁 룸드랍 물품 설명</h4>
+      <p>룸드랍 오픈 후 이 영역이 활성화됩니다.</p>
+    </div>
+
+    <div id="request" class="section">
+      <h4>✏️ 요청 사항</h4>
+      <textarea id="requestText" rows="4" placeholder="예: 기내식, 룸쉐어 요청 등"></textarea><br>
+      <button onclick="submitRequest()">제출</button>
+      <p id="submitMessage" style="color: green;"></p>
+    </div>
+
+    <div id="emergency" class="section">
+      <h4>📞 긴급 연락망</h4>
+      <p>현지 담당자: 김지현 / +64 21 123 4567<br>한국 담당자: 이성민 / 010-1234-5678</p>
+    </div>
+  </div>
+
+  <script>
+    const employeeMap = {
+      "1612156": "박상현",
+      "1612157": "박성현"
+    };
+
+    function login() {
+      const inputId = document.getElementById("employeeId").value.trim();
+      const name = employeeMap[inputId];
+
+      if (name) {
+        document.getElementById("loginSection").style.display = "none";
+        document.getElementById("mainMenu").style.display = "block";
+        document.getElementById("employeeName").textContent = name;
+        document.getElementById("loginError").textContent = "";
+      } else {
+        document.getElementById("loginError").textContent = "등록되지 않은 사번입니다.";
+        document.getElementById("mainMenu").style.display = "none";
+      }
+    }
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function submitRequest() {
+      const id = document.getElementById("employeeId").value.trim();
+      const name = employeeMap[id];
+      const request = document.getElementById("requestText").value.trim();
+
+      if (!request) {
+        alert("요청사항을 입력해주세요.");
+        return;
+      }
+
+      const endpoint = "https://script.google.com/macros/s/AKfycbzyu7FDCPWeEsb4dOa3MhJx8hFMONXfjl-CfUpOOIPWTXXdzHZK1eAAUxS7vz0Khq2G0A/exec";
+
+      // ✅ CORS 우회용 (응답은 못 받지만 저장은 가능)
+      fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id, name, request })
+      });
+
+      document.getElementById("submitMessage").textContent = "요청사항이 제출되었습니다. 감사합니다!";
+      document.getElementById("requestText").value = "";
+    }
+
+    function unlockRoomDrop() {
+      document.getElementById("roomDrop").style.display = "block";
+    }
+  </script>
+</body>
+</html>
