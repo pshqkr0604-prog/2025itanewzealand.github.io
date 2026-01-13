@@ -2,83 +2,83 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2025 ITA 뉴질랜드 여행</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-    input, textarea, button { padding: 10px; margin: 10px; width: 300px; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 5px 0; }
-    .section { display: none; margin-top: 30px; }
-  </style>
+  <script>
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    const cssFile = isMobile ? 'css/mobile.css' : 'css/desktop.css';
+    document.write(`<link rel="stylesheet" href="${cssFile}">`);
+  </script>
 </head>
 <body>
-  <h1>2025 ITA 뉴질랜드 여행 포털</h1>
+  <div class="container">
+    <header>
+      <h1>2025 ITA 뉴질랜드 여행</h1>
+      <p class="subtitle">참가자 전용 포털</p>
+    </header>
 
-  <!-- 로그인 -->
-  <div id="loginSection">
-    <p>사번을 입력하세요:</p>
-    <input type="text" id="employeeId" placeholder="예: 1612156">
-    <button onclick="login()">로그인</button>
-    <p id="loginError" style="color:red;"></p>
-  </div>
+    <section id="loginSection">
+      <p>사번을 입력하세요:</p>
+      <input type="text" id="employeeId" placeholder="예: 1612156">
+      <button onclick="login()">로그인</button>
+      <p id="loginError" class="error"></p>
+    </section>
 
-  <!-- 메인 메뉴 -->
-  <div id="mainMenu" style="display:none;">
-    <p><strong id="employeeName"></strong> 님, 환영합니다!</p>
-    <h3>📂 카테고리를 선택하세요:</h3>
-    <ul>
-      <li><button onclick="showSection('travelSchedule')">🗓 여행 일정 안내</button></li>
-      <li><button onclick="showSection('flightInfo')">✈️ 개인 항공편 정보</button></li>
-      <li><button onclick="showSection('eventSchedule')">🎉 행사 일정</button></li>
-      <li><button onclick="showSection('nzInfo')">🇳🇿 뉴질랜드 소개</button></li>
-      <li><button onclick="showSection('roomDrop')">🎁 룸드랍 물품 설명</button></li>
-      <li><button onclick="showSection('request')">✏️ 요청 사항</button></li>
-      <li><button onclick="showSection('emergency')">📞 긴급 연락망</button></li>
-    </ul>
+    <section id="mainMenu" style="display:none;">
+      <p><strong id="employeeName"></strong> 님, 환영합니다!</p>
+      <div class="menu">
+        <button onclick="showSection('travelSchedule')">🗓 여행 일정 안내</button>
+        <button onclick="showSection('flightInfo')">✈️ 항공편 정보</button>
+        <button onclick="showSection('eventSchedule')">🎉 행사 일정</button>
+        <button onclick="showSection('nzInfo')">🇳🇿 뉴질랜드 소개</button>
+        <button onclick="showSection('roomDrop')">🎁 룸드랍 물품</button>
+        <button onclick="showSection('request')">✏️ 요청 사항</button>
+        <button onclick="showSection('emergency')">📞 긴급 연락망</button>
+      </div>
 
-    <div id="travelSchedule" class="section">
-      <h4>🗓 여행 일정 안내</h4>
-      <p>1일차: 오클랜드 도착 / 환영식<br>2일차: 밀포드 사운드 투어<br>3일차: 자유 시간 / 선택 관광</p>
-    </div>
+      <div id="travelSchedule" class="section">
+        <h2>🗓 여행 일정 안내</h2>
+        <p>1일차: 오클랜드 도착 / 환영식<br>2일차: 밀포드 사운드 투어<br>3일차: 자유 시간 / 선택 관광</p>
+      </div>
 
-    <div id="flightInfo" class="section">
-      <h4>✈️ 개인 항공편 정보</h4>
-      <p id="flightData">항공편 정보를 불러오는 중...</p>
-    </div>
+      <div id="flightInfo" class="section">
+        <h2>✈️ 개인 항공편 정보</h2>
+        <p id="flightData">항공편 정보를 불러오는 중...</p>
+      </div>
 
-    <div id="eventSchedule" class="section">
-      <h4>🎉 행사 일정</h4>
-      <p>2일차 저녁: 환영 만찬<br>3일차 밤: 갈라 디너</p>
-    </div>
+      <div id="eventSchedule" class="section">
+        <h2>🎉 행사 일정</h2>
+        <p>2일차 저녁: 환영 만찬<br>3일차 밤: 갈라 디너</p>
+      </div>
 
-    <div id="nzInfo" class="section">
-      <h4>🇳🇿 뉴질랜드 소개</h4>
-      <p>국가명: 뉴질랜드<br>환율: 1 NZD ≈ 800 KRW<br>GDP: 약 2,100억 USD</p>
-    </div>
+      <div id="nzInfo" class="section">
+        <h2>🇳🇿 뉴질랜드 소개</h2>
+        <p>국가명: 뉴질랜드<br>환율: 1 NZD ≈ 800 KRW<br>GDP: 약 2,100억 USD</p>
+      </div>
 
-    <div id="roomDrop" class="section">
-      <h4>🎁 룸드랍 물품 설명</h4>
-      <p>룸드랍 오픈 후 이 영역이 활성화됩니다.</p>
-    </div>
+      <div id="roomDrop" class="section">
+        <h2>🎁 룸드랍 물품 설명</h2>
+        <p>룸드랍 공개 시 활성화됩니다.</p>
+      </div>
 
-    <div id="request" class="section">
-      <h4>✏️ 요청 사항</h4>
-      <textarea id="requestText" rows="4" placeholder="예: 기내식, 룸쉐어 요청 등"></textarea><br>
-      <button onclick="submitRequest()">제출</button>
-      <p id="submitMessage" style="color: green;"></p>
-    </div>
+      <div id="request" class="section">
+        <h2>✏️ 요청 사항</h2>
+        <textarea id="requestText" placeholder="예: 기내식, 룸쉐어 요청 등"></textarea><br>
+        <button onclick="submitRequest()">제출</button>
+        <p id="submitMessage" class="success"></p>
+      </div>
 
-    <div id="emergency" class="section">
-      <h4>📞 긴급 연락망</h4>
-      <p>현지 담당자: 김지현 / +64 21 123 4567<br>한국 담당자: 이성민 / 010-1234-5678</p>
-    </div>
+      <div id="emergency" class="section">
+        <h2>📞 긴급 연락망</h2>
+        <p>현지 담당자: 김지현 / +64 21 123 4567<br>한국 담당자: 이성민 / 010-1234-5678</p>
+      </div>
+    </section>
   </div>
 
   <script>
     let employeeData = [];
     let currentUser = null;
 
-    // ✅ 항상 최신 employees.json을 불러오게 하기 위한 캐시 우회
     fetch(`people/employees.json?ts=${Date.now()}`)
       .then(res => res.json())
       .then(data => { employeeData = data; });
@@ -86,41 +86,31 @@
     function login() {
       const id = document.getElementById("employeeId").value.trim();
       const matched = employeeData.find(emp => emp.id === id);
-
       if (matched) {
         currentUser = matched;
         document.getElementById("employeeName").textContent = matched.name;
         document.getElementById("loginSection").style.display = "none";
         document.getElementById("mainMenu").style.display = "block";
-        document.getElementById("loginError").textContent = "";
       } else {
         document.getElementById("loginError").textContent = "등록되지 않은 사번입니다.";
-        document.getElementById("mainMenu").style.display = "none";
       }
     }
 
     function showSection(id) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(sec => sec.style.display = 'none');
-      const selected = document.getElementById(id);
-      selected.style.display = 'block';
-
+      document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+      const section = document.getElementById(id);
+      section.style.display = 'block';
       if (id === "flightInfo" && currentUser) {
-        document.getElementById("flightData").textContent = currentUser.flight || "항공편 정보가 없습니다.";
+        document.getElementById("flightData").textContent = currentUser.flight || "등록된 항공편 정보가 없습니다.";
       }
     }
 
     function submitRequest() {
       if (!currentUser) return;
-
       const request = document.getElementById("requestText").value.trim();
-      if (!request) {
-        alert("요청사항을 입력해주세요.");
-        return;
-      }
+      if (!request) return alert("요청사항을 입력해주세요.");
 
       const endpoint = "https://script.google.com/macros/s/AKfycbzyu7FDCPWeEsb4dOa3MhJx8hFMONXfjl-CfUpOOIPWTXXdzHZK1eAAUxS7vz0Khq2G0A/exec";
-
       fetch(endpoint, {
         method: "POST",
         mode: "no-cors",
