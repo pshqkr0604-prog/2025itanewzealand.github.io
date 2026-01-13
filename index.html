@@ -112,31 +112,25 @@
         return;
       }
 
-      // ✅ 여기에 당신의 Web App URL 넣으세요
       const endpoint = "https://script.google.com/macros/s/AKfycbzyu7FDCPWeEsb4dOa3MhJx8hFMONXfjl-CfUpOOIPWTXXdzHZK1eAAUxS7vz0Khq2G0A/exec";
 
+      // ✅ CORS 우회용 (응답은 못 받지만 저장은 가능)
       fetch(endpoint, {
         method: "POST",
-        body: JSON.stringify({ id, name, request }),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(res => res.text())
-      .then(response => {
-        document.getElementById("submitMessage").textContent = "요청사항이 제출되었습니다. 감사합니다!";
-        document.getElementById("requestText").value = "";
-        console.log("서버 응답:", response);
-      })
-      .catch(error => {
-        console.error("에러 발생:", error);
-        alert("요청사항 제출에 실패했습니다. 다시 시도해주세요.");
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id, name, request })
       });
+
+      document.getElementById("submitMessage").textContent = "요청사항이 제출되었습니다. 감사합니다!";
+      document.getElementById("requestText").value = "";
     }
 
-    // 수동으로 룸드랍 오픈하려면 이 함수 호출
     function unlockRoomDrop() {
       document.getElementById("roomDrop").style.display = "block";
     }
   </script>
 </body>
 </html>
-
