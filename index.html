@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>2025 ITA 뉴질랜드 여행</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    input, textarea, button { padding: 10px; margin: 10px; width: 300px; }
+    #formSection { display: none; }
+  </style>
+</head>
+<body>
+  <h1>2025 ITA 뉴질랜드 여행 포털</h1>
+  <p>사번을 입력하세요:</p>
+  <input type="text" id="employeeId" placeholder="예: 1612156">
+  <button onclick="checkId()">확인</button>
+
+  <div id="formSection">
+    <p><strong id="employeeName"></strong> 님, 요청사항을 입력해주세요:</p>
+    <textarea id="request" rows="5" placeholder="요청사항을 입력하세요..."></textarea><br>
+    <button onclick="submitForm()">제출</button>
+    <p id="submitMessage" style="color: green;"></p>
+  </div>
+
+  <script>
+    const employeeMap = {
+      "1612156": "박상현",
+      "1612157": "박성현"
+    };
+
+    function checkId() {
+      const inputId = document.getElementById("employeeId").value.trim();
+      const name = employeeMap[inputId];
+
+      if (name) {
+        document.getElementById("employeeName").textContent = name;
+        document.getElementById("formSection").style.display = "block";
+        document.getElementById("submitMessage").textContent = "";
+      } else {
+        alert("등록되지 않은 사번입니다.");
+        document.getElementById("formSection").style.display = "none";
+      }
+    }
+
+    function submitForm() {
+      const request = document.getElementById("request").value.trim();
+      const id = document.getElementById("employeeId").value.trim();
+      const name = employeeMap[id];
+
+      if (request === "") {
+        alert("요청사항을 입력해주세요.");
+        return;
+      }
+
+      // 실제론 여기에 Google Sheets 연동이 들어갑니다 (다음 단계)
+      console.log("사번:", id);
+      console.log("이름:", name);
+      console.log("요청사항:", request);
+
+      document.getElementById("submitMessage").textContent = "요청사항이 제출되었습니다. 감사합니다!";
+      document.getElementById("request").value = "";
+    }
+  </script>
+</body>
+</html>
