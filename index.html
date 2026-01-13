@@ -78,8 +78,8 @@
     let employeeData = [];
     let currentUser = null;
 
-    // ✅ JSON 경로 수정된 부분
-    fetch("people/employees.json")
+    // ✅ 항상 최신 employees.json을 불러오게 하기 위한 캐시 우회
+    fetch(`people/employees.json?ts=${Date.now()}`)
       .then(res => res.json())
       .then(data => { employeeData = data; });
 
