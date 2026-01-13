@@ -1,1 +1,51 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
 
+h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+input, textarea, button {
+  width: 90%;
+  padding: 12px;
+  margin: 10px auto;
+  display: block;
+  font-size: 16px;
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  margin: 5px auto;
+  font-size: 16px;
+  background-color: #0078ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.section {
+  text-align: left;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
