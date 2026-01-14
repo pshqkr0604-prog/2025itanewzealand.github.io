@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2025 ITA 뉴질랜드 여행</title>
   <script>
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
@@ -13,6 +13,7 @@
 <body>
   <div class="container">
     <header>
+      <img src="assets/images/logo.png" alt="회사 로고" class="logo">
       <h1>2025 ITA 뉴질랜드 여행</h1>
       <p class="subtitle">참가자 전용 포털</p>
     </header>
@@ -98,8 +99,7 @@
 
     function showSection(id) {
       document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-      const section = document.getElementById(id);
-      section.style.display = 'block';
+      document.getElementById(id).style.display = 'block';
       if (id === "flightInfo" && currentUser) {
         document.getElementById("flightData").textContent = currentUser.flight || "등록된 항공편 정보가 없습니다.";
       }
@@ -110,7 +110,7 @@
       const request = document.getElementById("requestText").value.trim();
       if (!request) return alert("요청사항을 입력해주세요.");
 
-      const endpoint = "https://script.google.com/macros/s/AKfycbzyu7FDCPWeEsb4dOa3MhJx8hFMONXfjl-CfUpOOIPWTXXdzHZK1eAAUxS7vz0Khq2G0A/exec";
+      const endpoint = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
       fetch(endpoint, {
         method: "POST",
         mode: "no-cors",
