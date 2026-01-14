@@ -1,9 +1,15 @@
 body {
   font-family: sans-serif;
   background-color: #eef1f5;
-  padding: 40px;
   max-width: 1000px;
   margin: auto;
+  padding: 40px;
+}
+
+.logo {
+  width: 180px;
+  display: block;
+  margin-bottom: 20px;
 }
 
 h1 {
@@ -45,10 +51,5 @@ input, textarea, button {
   margin-top: 20px;
 }
 
-.success {
-  color: green;
-}
-
-.error {
-  color: red;
-}
+.success { color: green; }
+.error { color: red; }
